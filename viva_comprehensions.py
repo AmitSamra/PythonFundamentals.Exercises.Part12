@@ -18,9 +18,9 @@ def gen_list(start: int, stop: int, parity: Parity) -> List[int]:
     :param parity: specifies odd (= 0) or even values (= 1)
     :return: list of numbers in range(start,stop)
     """
-    if parity == 0:
+    if parity == Parity.ODD:
         return [x for x in range(start,stop) if x % 2 != 0]
-    elif parity == 1:
+    elif parity == Parity.EVEN:
         return [x for x in range(start, stop) if x % 2 == 0]
 
 
@@ -53,7 +53,16 @@ def gen_set(val_in: str) -> Set:
     :param val_in: string
     :return: set of upper case letters
     """
-    a = []
-    for i in val_in:
-        a.append(i.upper())
-    return set(a)
+    if val_in.islower():
+        a = []
+        for i in val_in:
+            a.append(i.upper())
+        return set(a)
+    elif not val_in.isupper():
+        a = []
+        for i in val_in:
+            if i.islower():
+                a.append(i.upper())
+        return set(a)
+    elif val_in.isupper():
+        return set()
