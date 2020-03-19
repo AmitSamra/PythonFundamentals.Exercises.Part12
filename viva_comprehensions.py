@@ -1,6 +1,6 @@
 from typing import List, Dict, Set, Callable
 import enum
-
+import math
 
 class Parity(enum.Enum):
     ODD = 0
@@ -13,12 +13,15 @@ def gen_list(start: int, stop: int, parity: Parity) -> List[int]:
     what this method was supposed to do. Hey if you do, maybe you could do some good in this world by
     updating this here docstring to something useful.
 
-    :param start:
-    :param stop:
-    :param parity:
-    :return:
+    :param start: starting value of list
+    :param stop: stopping value of list
+    :param parity: specifies odd (= 0) or even values (= 1)
+    :return: list of numbers in range(start,stop)
     """
-    pass
+    if parity == 0:
+        return [x for x in range(start,stop) if x % 2 != 0]
+    elif parity == 1:
+        return [x for x in range(start, stop) if x % 2 == 0]
 
 
 def gen_dict(start: int, stop: int, strategy: Callable) -> Dict:
@@ -28,12 +31,17 @@ def gen_dict(start: int, stop: int, strategy: Callable) -> Dict:
     updating this here docstring to something useful.
 
 
-    :param start:
-    :param stop:
-    :param strategy:
-    :return:
+    :param start: starting number in range(start,stop)
+    :param stop: ending number (exclusive) in range(start,stop)
+    :param strategy: a lambda function
+    :return: a dictionary with integer being keys from range(start,stop) and values being lambda operations
+    performed on each key, respectively
     """
-    pass
+    a = list(range(start,stop))
+    b = {}
+    for i in a:
+        b[i]=strategy(i)
+    return b
 
 
 def gen_set(val_in: str) -> Set:
@@ -42,7 +50,10 @@ def gen_set(val_in: str) -> Set:
     what this method was supposed to do. Hey if you do, maybe you could do some good in this world by
     updating this here docstring to something useful.
 
-    :param val_in:
-    :return:
+    :param val_in: string
+    :return: set of upper case letters
     """
-    pass
+    a = []
+    for i in val_in:
+        a.append(i.upper())
+    return set(a)
